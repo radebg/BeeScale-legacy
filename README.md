@@ -18,3 +18,6 @@ Secondary goals are:
 
 All data should be visible on the some internet portal(IoT)
 System should be modular
+
+# Disclaimer
+There is no warranty, expressed or implied, associated with this product. Use at your own risk.
