@@ -48,7 +48,6 @@ float soilMoisture;
 float soilReading;
 
 String atResponse;
-
 //String apn = "internet";				// APN of your provider
 //String username = "";					// username for your gprs provider
 //String password = "";					// password for your grps provider
@@ -79,33 +78,33 @@ void setup()
 
 	// initialize serial port
 	Serial.begin(9600);
-	Serial.println("...+++++++++...1");
+	Serial.println("...+++++++++...1");				// debugging purposses only
 
 	// initialize rtc communication trough i2c port (on A4 and A5)
 	Wire.begin();
-	Serial.println("...+++++++++...2");
+	Serial.println("...+++++++++...2");				// debugging purposses only
 
 	// initialize software serial port for communication with gsm module SIM800l
 	gsmSerial.begin(9600);
-	Serial.println("...+++++++++...3");
+	Serial.println("...+++++++++...3");				// debugging purposses only
 	// Initialize DS3231
 	clock.begin();
 	//clock.setDateTime(__DATE__, __TIME__);
-	Serial.println("...+++++++++...4");
+	Serial.println("...+++++++++...4");				// debugging purposses only
 
 	// Disable square wave output (use alarm triggering)
 	Wire.beginTransmission(0x68);
 	Wire.write(0x0e);
 	Wire.write(0b00110111);
 	Wire.endTransmission();
-	Serial.println("...+++++++++...5");
+	Serial.println("...+++++++++...5");				// debugging purposses only
 
 	// Disable DS3231 Alarms 1 and 2
 	clock.armAlarm1(false);
 	clock.armAlarm2(false);
 	clock.clearAlarm1();
 	clock.clearAlarm2();
-	Serial.println("...+++++++++...6");
+	Serial.println("...+++++++++...6");				// debugging purposses only
 
 	// Put PIN 2 as an Interrupt (0)
 	// Put PIN 3 as an Interrupt (1)
@@ -121,17 +120,17 @@ void setup()
 	//clock.setAlarm1(0, 0, 0, 0, DS3231_MATCH_S);
 	//________________________________________________________
 
-	Serial.println("...+++++++++...7");
-	gsmSerial.println(F("ATE1"));		//Switch on Echo
+	Serial.println("...+++++++++...7");				// debugging purposses only
+	gsmSerial.println(F("ATE1"));					//Switch on Echo
 	delay(500);
 	ReadGsmBuffer();
-	gsmSerial.println(F("AT+CMGF=1"));	// put SMS module into Text mode
+	gsmSerial.println(F("AT+CMGF=1"));				// put SMS module into Text mode
 	delay(500);
 	ReadGsmBuffer();
-	gsmSerial.println(F("AT+CIPSHUT"));	//close the GPRS PDP context
+	gsmSerial.println(F("AT+CIPSHUT"));				//close the GPRS PDP context
 	delay(500);
 	ReadGsmBuffer();
-	gsmSerial.println(F("AT+CSCLK=1"));	//prepare for sleep mode when gsmWakePin is High
+	gsmSerial.println(F("AT+CSCLK=1"));				//prepare for sleep mode when gsmWakePin is High
 	delay(500);
 	ReadGsmBuffer();
 
@@ -291,7 +290,7 @@ void goToSleep()
 	power_timer2_disable();
 	//power_twi_disable();
 	//power_spi_disable();
-	sleep_enable();								// enables the sleep bit in the mcucr register
+	sleep_enable();							// enables the sleep bit in the mcucr register
 	sleep_mode();
 
 	// The Arduino wake up here
